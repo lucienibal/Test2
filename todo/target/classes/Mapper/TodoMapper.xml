@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.app.todo.dao.TodoMapper">
+	<insert id="insertTodo" parameterType="Todo">
+	INSERT INTO TODO
+	(
+		ID
+		,TITLE
+		,NAME
+		,SEQ
+	)
+	VALUES
+	(
+		TODOSEQ.NEXTVAL
+		,#{title}
+		,#{name}
+		,#{seq}
+	)
+	</insert>
+	
+	<select id="selectTodo" resultType="Todo">
+	SELECT
+		ID
+		,NAME
+		,TYPE
+		,SEQ
+		,TITLE
+		,TO_CHAR(REGDATE,'YYYY.MM.DD') REGDATE 
+	FROM
+		TODO
+	ORDER BY
+		REGDATE ASC
+	</select>
+	
+	<update id="updateTodo" parameterType="Todo">
+	UPDATE TODO SET
+		TYPE=#{type}
+	WHERE
+		ID=#{id}
+	</update>
+	
+	<delete id="deleteTodo" parameterType="Todo"> 
+	DELETE TODO
+	WHERE
+		ID=#{id}
+	</delete>
+	
+</mapper>
+
+
+
